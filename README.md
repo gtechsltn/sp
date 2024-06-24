@@ -1,5 +1,9 @@
 # Stored Procedure Caller Generator
 
+https://github.com/gtechsltn/sp/
+
+https://github.com/gtechsltn/DapperHelper
+
 ```
 EXEC [dbo].[sp_desc] N'Assets'
 ```
