@@ -4,6 +4,14 @@
 EXEC [dbo].[sp_desc] N'Assets'
 ```
 
+How to get stored procedure parameters details?
+
+https://stackoverflow.com/questions/20115881/how-to-get-stored-procedure-parameters-details
+
+Passing Output parameters to stored procedure using dapper in c# code
+
+https://stackoverflow.com/questions/22353881/passing-output-parameters-to-stored-procedure-using-dapper-in-c-sharp-code
+
 ###  Gen Code
 + Stored Procedure Caller Generator
 + https://github.com/gtechsltn/DapperHelper/
