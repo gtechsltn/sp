@@ -8,13 +8,64 @@ https://github.com/gtechsltn/DapperHelper
 EXEC [dbo].[sp_desc] N'Assets'
 ```
 
-How to get stored procedure parameters details?
+## How to get stored procedure parameters details?
 
 https://stackoverflow.com/questions/20115881/how-to-get-stored-procedure-parameters-details
 
-Passing Output parameters to stored procedure using dapper in c# code
+```
+select  
+   'Parameter_name' = name,  
+   'Type'   = type_name(user_type_id),  
+   'Length'   = max_length,  
+   'Prec'   = case when type_name(system_type_id) = 'uniqueidentifier' 
+              then precision  
+              else OdbcPrec(system_type_id, max_length, precision) end,  
+   'Scale'   = OdbcScale(system_type_id, scale),  
+   'Param_order'  = parameter_id,  
+   'Collation'   = convert(sysname, 
+                   case when system_type_id in (35, 99, 167, 175, 231, 239)  
+                   then ServerProperty('collation') end)
+  from sys.parameters where object_id = object_id('dbo.core_insertEventLog')
+```
+
+## Passing Output parameters to stored procedure using dapper in c# code
 
 https://stackoverflow.com/questions/22353881/passing-output-parameters-to-stored-procedure-using-dapper-in-c-sharp-code
+
+```
+public void TestProcSupport()
+{
+    var p = new DynamicParameters();
+    p.Add("a", 11);
+    p.Add("b", dbType: DbType.Int32, direction: ParameterDirection.Output);
+    p.Add("c", dbType: DbType.Int32, direction: ParameterDirection.ReturnValue);
+    connection.Execute(@"create proc #TestProc 
+                         @a int,
+                         @b int output
+                         as 
+                         begin
+                             set @b = 999
+                             select 1111
+                             return @a
+                         end");
+    connection.Query<int>("#TestProc", p, commandType: CommandType.StoredProcedure).First().IsEqualTo(1111);
+    p.Get<int>("c").IsEqualTo(11);
+    p.Get<int>("b").IsEqualTo(999);
+}
+```
+
+```
+public void InsertData()
+{
+    var p = new DynamicParameters();
+    p.Add("VAR1", "John");
+    p.Add("VAR2", "McEnroe");
+    p.Add("BASEID", 1);
+    p.Add("NEWID", dbType: DbType.Int32, direction: ParameterDirection.Output);
+    connection.Query<int>("SP_MYTESTpROC", p, commandType: CommandType.StoredProcedure);
+    int newID =  p.Get<int>("NEWID");
+}
+```
 
 ###  Gen Code
 + Stored Procedure Caller Generator
