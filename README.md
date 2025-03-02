@@ -4,10 +4,6 @@ https://github.com/gtechsltn/sp/
 
 https://github.com/gtechsltn/DapperHelper
 
-```
-EXEC [dbo].[sp_desc] N'Assets'
-```
-
 ## How to get stored procedure parameters details?
 
 https://stackoverflow.com/questions/20115881/how-to-get-stored-procedure-parameters-details
@@ -71,17 +67,19 @@ public void InsertData()
 + Stored Procedure Caller Generator
 + https://github.com/gtechsltn/DapperHelper/
 
-###  Get [name], [type], [default value] and also [comment] of [column] in [table]
+### What is the equivalent of 'describe table' in SQL Server?
+
+https://stackoverflow.com/questions/319354/what-is-the-equivalent-of-describe-table-in-sql-server
+
++ Get [name], [type], [default value] and also [comment] of [column] in [table]
 + Lấy [tên], [kiểu], [giá trị mặc định] và cả [comments] của [cột] trong [bảng]
 
 ```
--- Lấy [tên], [kiểu], [giá trị mặc định] và cả [comments] của [cột] trong [bảng]
-
 IF OBJECT_ID('sp_desc', 'P') IS NOT NULL
   DROP PROCEDURE sp_desc
 GO
 
-CREATE PROCEDURE sp_desc (
+CREATE PROCEDURE [dbo].[sp_desc] (
   @tableName  nvarchar(128)
 ) AS
 
@@ -180,3 +178,26 @@ BEGIN
 END;
 GO
 ```
+
+```
+EXEC [dbo].[sp_help] N'Assets'
+EXEC [dbo].[sp_columns] N'Assets'
+EXEC [dbo].[sp_desc] N'Assets'
+```
+
+## Follow steps:
+
+Write Table Name,
+
+Select it, and press Alt + F1
+
+It will show detailed information/ description of mentioned table as,
+
+1) Table created date,
+2) Columns Description,
+3) Identity,
+4) Indexes,
+5) Constraints,
+6) References etc. As shown Below
+
+https://stackoverflow.com/questions/11078106/how-to-describe-table-in-sql-server-2008
