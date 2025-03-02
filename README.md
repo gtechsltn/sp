@@ -185,7 +185,9 @@ EXEC [dbo].[sp_columns] N'Assets'
 EXEC [dbo].[sp_desc] N'Assets'
 ```
 
-## Follow steps:
+## How to describe table in SQL Server
+
+Follow steps:
 
 Write Table Name,
 
@@ -201,3 +203,7 @@ It will show detailed information/ description of mentioned table as,
 6) References etc. As shown Below
 
 https://stackoverflow.com/questions/11078106/how-to-describe-table-in-sql-server-2008
+
+https://github.com/gtechsltn/Sybase-ASE-shell-Script
+
+https://github.com/kimls2/Sybase-ASE-shell-Script
