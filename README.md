@@ -1,8 +1,7 @@
 # Stored Procedure Caller Generator
-
-https://github.com/gtechsltn/sp/
-
-https://github.com/gtechsltn/DapperHelper
++ [Stored Procedure Caller Generator](https://github.com/gtechsltn/sp)
++ [SP Discovery](https://github.com/gtechsltn/SPDiscovery)
++ [Dapper Helper](https://github.com/gtechsltn/DapperHelper)
 
 ## How to get stored procedure parameters details?
 
